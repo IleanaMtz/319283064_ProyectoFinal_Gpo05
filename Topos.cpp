@@ -1,7 +1,7 @@
 #include "Topos.h"
 
 void topos(glm::mat4 model, GLuint uniformModel, std::vector<Model> objetosTopos, Texture &tierra, std::vector<Mesh*> meshList) {
-	renderStand6(model, uniformModel, objetosTopos[0], glm::vec3(50.0f, -1.02f, 140.0f), tierra, meshList);
+	renderStand6(model, uniformModel, objetosTopos[0], glm::vec3(50.0f, -1.0f, 140.0f), tierra, meshList);
 }
 
 void renderStand6(glm::mat4 model, GLuint uniformModel, Model stand, glm::vec3 posicion, Texture &tierra, std::vector<Mesh*> lista) {

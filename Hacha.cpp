@@ -1,7 +1,7 @@
 #include "Hacha.h"
 
 void hacha(glm::mat4 model, GLuint uniformModel, std::vector<Model> objetosHacha, Texture &tierra, std::vector<Mesh*> meshList) {
-	renderStand(model, uniformModel, objetosHacha[0], glm::vec3(180.0f, -1.02f, 140.0f), tierra, meshList);
+	renderStand(model, uniformModel, objetosHacha[0], glm::vec3(180.0f, -1.0f, 140.0f), tierra, meshList);
 }
 
 void renderStand(glm::mat4 model, GLuint uniformModel, Model stand, glm::vec3 posicion, Texture &tierra, std::vector<Mesh*> lista) {

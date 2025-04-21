@@ -85,6 +85,8 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="NPCs.h">
+    <ClInclude Include="Comida.h">
+
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -152,7 +154,11 @@
     <ClCompile Include="Topos.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+
     <ClCompile Include="NPCs.cpp">
+
+    <ClCompile Include="Comida.cpp">
+
       <Filter>Archivos de origen</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #include "Dados.h"
 
 void dados(glm::mat4 model, GLuint uniformModel, std::vector<Model> objetosDados, Texture &tierra, std::vector<Mesh*> meshList) {
-	renderStand3(model, uniformModel, objetosDados[0], glm::vec3(180.0f, -1.02f, -140.0f), tierra, meshList);
+	renderStand3(model, uniformModel, objetosDados[0], glm::vec3(180.0f, -1.0f, -140.0f), tierra, meshList);
 	//renderLuminaria1(model, uniformModel, objetosAmbientacion[1], glm::vec3(10.0f, -1.02f, 0.0f));
 }
 

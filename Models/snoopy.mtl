@@ -1,0 +1,36 @@
+# Blender 4.4.1 MTL File: 'None'
+# www.blender.org
+
+newmtl fur_m.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.180272 0.180272 0.180272
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd snoopy_low_fur_m_BaseColor.png
+map_Ns snoopy_low_fur_m_Roughness.png
+map_refl snoopy_low_fur_m_Metallic.png
+map_Bump -bm 1.000000 snoopy_low_fur_m_Normal.png
+
+newmtl furtexture_m.001
+Ns 0.000000
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd snoopy_low_fur_m_BaseColor.png
+
+newmtl misc_m.001
+Ka 1.000000 1.000000 1.000000
+Ks 0.500000 0.500000 0.500000
+Ke 0.000000 0.000000 0.000000
+Ni 1.500000
+d 1.000000
+illum 2
+map_Kd snoopy_low_misc_m_BaseColor.png
+map_Ns snoopy_low_misc_m_Roughness.png
+map_refl snoopy_low_misc_m_Metallic.png
+map_Bump -bm 1.000000 snoopy_low_misc_m_Normal.png

@@ -27,7 +27,7 @@ Window::Window(GLint windowWidth, GLint windowHeight)
 
 	lucesCarro = -1;
 
-	pastel = 0;
+	camaraActiva = 0;
 
 	for (size_t i = 0; i < 1024; i++)
 	{
@@ -116,6 +116,21 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 	{
 		glfwSetWindowShouldClose(window, GL_TRUE);
 	}
+	if (action == GLFW_PRESS) {
+		if (key == GLFW_KEY_1) {
+			theWindow->camaraActiva = 1; // aérea
+		}
+		if (key == GLFW_KEY_2) {
+			theWindow->camaraActiva = 0; // libre
+		}
+		if (key == GLFW_KEY_3) {
+			theWindow->camaraActiva = 2; // tercera persona
+		}
+		if (key == GLFW_KEY_4) {
+			theWindow->camaraActiva = 3; // lámpara
+		}
+	}
+	
 	if (key == GLFW_KEY_Y)
 	{
 		theWindow->muevex += 1.0;
@@ -195,14 +210,6 @@ void Window::ManejaTeclado(GLFWwindow* window, int key, int code, int action, in
 		theWindow->lucesCarro = 2;
 	}
 
-	if (key == GLFW_KEY_N && action == GLFW_PRESS) {
-		if (theWindow->pastel == 1) {
-			theWindow->pastel = 0;
-		}
-		else {
-			theWindow->pastel = 1;
-		}
-	}
 }
 
 
