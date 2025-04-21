@@ -36,6 +36,9 @@
 //Modelos ambientación
 #include "Ambientacion.h"
 
+//Modelos NPCs
+#include "NPCs.h"
+
 //Juegos
 
 #include "Dados.h"
@@ -58,6 +61,7 @@ std::vector<Model> objetosBolos;
 std::vector<Model> objetosDardos;
 std::vector<Model> objetosHacha;
 std::vector<Model> objetosTopos;
+std::vector<Model> personajesNPCs;
 
 Camera camera;
 
@@ -85,6 +89,17 @@ Model arbol2;
 Model arbol3;
 Model bote1;
 Model bote2;
+
+//Modelos NPCs
+Model woodstock;
+Model peppermint;
+Model charlie;
+Model carrie;
+Model teri;
+Model bowser;
+Model kingBoo;
+Model donkeyKong;
+Model wario;
 
 Skybox skybox;
 
@@ -366,6 +381,40 @@ int main()
 	objetosAmbientacion.push_back(bote1);
 	objetosAmbientacion.push_back(bote2);
 
+	//Modelos NPCs
+	woodstock = Model();
+	woodstock.LoadModel("Models/Woodstock.obj");
+	peppermint = Model();
+	peppermint.LoadModel("Models/Peppermint.obj");
+	charlie = Model();
+	charlie.LoadModel("Models/Charlie.obj");
+
+	////Gumball
+	//carrie = Model();
+	//carrie.LoadModel("Models/Woodstock.obj");
+	//teri = Model();
+	//teri.LoadModel("Models/Peppermint.obj");
+
+	////Mario
+	//bowser = Model();
+	//bowser.LoadModel("Models/Charlie.obj");
+	//kingBoo = Model();
+	//kingBoo.LoadModel("Models/Charlie.obj");
+	//donkeyKong = Model();
+	//donkeyKong.LoadModel("Models/Charlie.obj");
+	//wario = Model();
+	//wario.LoadModel("Models/Charlie.obj");
+
+	personajesNPCs.push_back(woodstock);
+	personajesNPCs.push_back(peppermint);
+	personajesNPCs.push_back(charlie);
+	personajesNPCs.push_back(carrie);
+	personajesNPCs.push_back(teri);
+	personajesNPCs.push_back(bowser);
+	personajesNPCs.push_back(kingBoo);
+	personajesNPCs.push_back(donkeyKong);
+	personajesNPCs.push_back(wario);
+
 	std::vector<std::string> skyboxFaces;
 
 	skyboxFaces.push_back("Textures/Skybox/right.tga");
@@ -470,9 +519,12 @@ int main()
 
 		//Modelos ambientación
 		ambientacion(model, uniformModel, objetosAmbientacion);
+
+		//Modelos NPCs
+		NPCs(model, uniformModel, personajesNPCs);
   
-    //Dados
-    model = glm::mat4(1.0);
+		//Dados
+		model = glm::mat4(1.0);
 		dados(model, uniformModel, objetosDados, tierraTexture, meshList);
 
 		//Lanzamiento de hacha
