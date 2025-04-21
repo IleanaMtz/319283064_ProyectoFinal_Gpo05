@@ -37,6 +37,10 @@ void ambientacion(glm::mat4 model, GLuint uniformModel, std::vector<Model> objet
 	renderBote2(model, uniformModel, objetosAmbientacion[8], glm::vec3(-160.0f, -1.0f, 98.0f), 90);
 	renderBote1(model, uniformModel, objetosAmbientacion[7], glm::vec3(-160.0f, -1.0f, -90.0f), 90);
 	renderBote2(model, uniformModel, objetosAmbientacion[8], glm::vec3(-160.0f, -1.0f, -98.0f), 90);
+
+	//ambientacion de puestos
+	renderPlantaDecorativa(model, uniformModel, objetosAmbientacion[9], glm::vec3(-60.0f,-0.5f, 180.0f));
+	renderPlantaDecorativa(model, uniformModel, objetosAmbientacion[9], glm::vec3(-98.0f, -0.5f, 180.0f));
 }
 
 void renderBanca(glm::mat4 model, GLuint uniformModel, Model banca, glm::vec3 posicion, int grados) {
@@ -115,3 +119,9 @@ void renderBote2(glm::mat4 model, GLuint uniformModel, Model bote2, glm::vec3 po
 	bote2.RenderModel();
 }
 
+void renderPlantaDecorativa(glm::mat4 model, GLuint uniformModel, Model planta, glm::vec3 posicion) {
+	model = glm::mat4(1.0);
+	model = glm::translate(model, posicion);
+	glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+	planta.RenderModel();
+}
