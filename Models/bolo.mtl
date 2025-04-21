@@ -1,0 +1,13 @@
+# Blender 4.4.1 MTL File: 'None'
+# www.blender.org
+
+newmtl TT_checker_512x512_UV_GRID.002
+Ka 1.000000 1.000000 1.000000
+Ks 1.000000 1.000000 1.000000
+Ke 0.000000 0.000000 0.000000
+Ni 1.450000
+d 1.000000
+illum 2
+map_Kd Base color.png
+map_Ns rog pino.png
+map_Bump 24df104a4f60ebe5ec24e699d683eacf.jpg
