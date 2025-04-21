@@ -75,12 +75,24 @@ Texture plainTexture;
 Texture pisoTexture;
 Texture tierraTexture;
 
-//Modelo puestos
+//Modelos juegos
+//Lanzamiento de hacha
 Model Stand;
+//Jaula de bateo
 Model Stand2;
+//Lanzamiento de dados
 Model Stand3;
+
+//Lanzamiento de dardos
 Model Stand4;
+Model baseDardos;
+Model globoDardos;
+Model tablaDardos;
+Model dardo;
+
+//Boliche
 Model Stand5;
+//Topos
 Model Stand6;
 
 
@@ -351,26 +363,45 @@ int main()
 	tierraTexture = Texture("Textures/tierra.jpg");
 	tierraTexture.LoadTextureA();
   
-	//Modelos puestos
+	//Modelos juegos
+	//Lanzamiento de hacha
 	Stand = Model();
 	Stand.LoadModel("Models/StandHacha.obj");
+	objetosHacha.push_back(Stand);
+	//Jaula de bateo
 	Stand2 = Model();
 	Stand2.LoadModel("Models/StandBateo.obj");
+	objetosBateo.push_back(Stand2);
+	//Lanzamiento de dados
 	Stand3 = Model();
 	Stand3.LoadModel("Models/StandDados.obj");
+	objetosDados.push_back(Stand3);
+	//Lanzamiento de dardos
 	Stand4 = Model();
 	Stand4.LoadModel("Models/StandDardos.obj");
+	objetosDardos.push_back(Stand4);
+	baseDardos = Model();
+	baseDardos.LoadModel("Models/BaseDardos.obj");
+	objetosDardos.push_back(baseDardos);
+	globoDardos = Model();
+	globoDardos.LoadModel("Models/GloboDardos.obj");
+	objetosDardos.push_back(globoDardos);
+	tablaDardos = Model();
+	tablaDardos.LoadModel("Models/TablaDardos.obj");
+	objetosDardos.push_back(tablaDardos);
+	dardo = Model();
+	dardo.LoadModel("Models/Dardo.obj");
+	objetosDardos.push_back(dardo);
+	//Boliche
 	Stand5 = Model();
 	Stand5.LoadModel("Models/StandBolos.obj");
+	objetosBolos.push_back(Stand5);
+	//Topos
 	Stand6 = Model();
 	Stand6.LoadModel("Models/StandTopos.obj");
-
-	objetosHacha.push_back(Stand);
-	objetosBateo.push_back(Stand2);
-	objetosDados.push_back(Stand3);
-	objetosDardos.push_back(Stand4);
-	objetosBolos.push_back(Stand5);
 	objetosTopos.push_back(Stand6);
+
+	
 
 	//Modelos ambientación
 	banca = Model();
@@ -405,7 +436,6 @@ int main()
 	snoopy = Model();
 	snoopy.LoadModel("Models/snoopy.obj");
 
-	
 	objetosAmbientacion.push_back(banca);
 	objetosAmbientacion.push_back(luminaria1);
 	objetosAmbientacion.push_back(luminaria2);
@@ -650,8 +680,8 @@ int main()
 		snoopy.RenderModel();
 		
 
-    //Dados
-    model = glm::mat4(1.0);
+		//Dados
+		model = glm::mat4(1.0);
 		dados(model, uniformModel, objetosDados, tierraTexture, meshList);
 
 		//Lanzamiento de hacha
@@ -666,7 +696,7 @@ int main()
 		model = glm::mat4(1.0);
 		topos(model, uniformModel, objetosTopos, tierraTexture, meshList);
 
-		//Jaula de bateo
+		//Caminos y Jaula de bateo
 		model = glm::mat4(1.0);
 		bateo(model, uniformModel, objetosBateo, tierraTexture, meshList);
 
@@ -674,7 +704,7 @@ int main()
 		model = glm::mat4(1.0);
 		bolos(model, uniformModel, objetosBolos, tierraTexture, meshList);
 
-		//Caminos y área de comida
+		//Área de comida
 		model = glm::mat4(1.0);
 		//comida(model, uniformModel, objetosComida, tierraTexture, meshList);
 		
