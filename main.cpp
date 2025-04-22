@@ -35,9 +35,12 @@
 
 //Modelos ambientación
 #include "Ambientacion.h"
-#include "Comida.h"
+
+//Modelos NPCs
+#include "NPCs.h"
 
 //Juegos
+
 #include "Dados.h"
 #include "Bateo.h"
 #include "Bolos.h"
@@ -46,10 +49,7 @@
 #include "Topos.h"
 
 const float toRadians = 3.14159265f / 180.0f;
-//variables para el ciclo de dia y de noche
-bool esDeDia = true;
-float intensidad = 0.5f;  // inicia de día
-float velocidad = 0.00005f; // velocidad de cambio de luz
+
 
 Window mainWindow;
 std::vector<Mesh*> meshList;
@@ -61,14 +61,9 @@ std::vector<Model> objetosBolos;
 std::vector<Model> objetosDardos;
 std::vector<Model> objetosHacha;
 std::vector<Model> objetosTopos;
-std::vector<Model> objetosComida;
+std::vector<Model> personajesNPCs;
 
-
-//camaras realizadas 
 Camera camera;
-Camera aerialCamera;
-Camera terceraPersonaCamera;
-Camera camaraPuestos;
 
 Texture brickTexture;
 Texture dirtTexture;
@@ -84,30 +79,6 @@ Model Stand4;
 Model Stand5;
 Model Stand6;
 
-//modelos puesto boliche
-Model bolo;
-Model bolaBoliche;
-Model mesaBoliche;
-Model cartelBoliche;
-Model estantePremios;
-Model plantaDecorativa;
-
-//modelos puesto de bateo
-Model bardaBateo;
-Model objetivoBateo;
-Model cartelBateo;
-Model bate;
-
-////Modelo puestos comida
-//Model StandComida1;
-//Model StandComida2;
-//Model StandComida3;
-
-//modelos de personajes 
-Model gumball;
-Model yoshi;
-Model snoopy;
-
 //Modelos ambientación
 Model banca;
 Model luminaria1;
@@ -118,6 +89,17 @@ Model arbol2;
 Model arbol3;
 Model bote1;
 Model bote2;
+
+//Modelos NPCs
+Model woodstock;
+Model peppermint;
+Model charlie;
+Model carrie;
+Model teri;
+Model bowser;
+Model kingBoo;
+Model donkeyKong;
+Model wario;
 
 Skybox skybox;
 
@@ -334,25 +316,7 @@ int main()
 	CrearDado();
 	CreateShaders();
 
-	//camara libre
 	camera = Camera(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), -60.0f, 0.0f, 0.3f, 0.5f);
-
-
-	aerialCamera = Camera(glm::vec3(0.0f, 450.0f, 0.0f),  // posición muy arriba
-		glm::vec3(0.0f, 1.0f, 0.0f),    // vector Up
-		-90.0f,                        // yaw
-		-89.9f,                        // pitch casi vertical (evita ser -90 exacto)
-		0.0f, 0.0f);                   // sin movimiento o rotación
-
-	//Tercera persona (siguiendo coche desde atrás)
-	terceraPersonaCamera = Camera(glm::vec3(2.0f, 2.0f, 0.5f),  // posición detrás del coche
-		glm::vec3(0.0f, 1.0f, 0.0f),
-		180.0f, 0.0f, 0.3f, 0.5f);  // sin movimiento
-
-	// Cámara Para posicionar en los puestos
-	camaraPuestos = Camera(glm::vec3(-80.0f, 20.0f, -40.0f),  //frente a un puesto
-		glm::vec3(0.0f, 1.0f, 0.0f),
-		270.0f, 0.0f, 0.0f, 0.0f);
 
 	brickTexture = Texture("Textures/brick.png");
 	brickTexture.LoadTextureA();
@@ -364,8 +328,9 @@ int main()
 	pisoTexture.LoadTextureA();
 	tierraTexture = Texture("Textures/tierra.jpg");
 	tierraTexture.LoadTextureA();
+
   
-	//Modelos puestos
+  //Modelos puestos
 	Stand = Model();
 	Stand.LoadModel("Models/StandHacha.obj");
 	Stand2 = Model();
@@ -379,60 +344,11 @@ int main()
 	Stand6 = Model();
 	Stand6.LoadModel("Models/StandTopos.obj");
 
-	//MODELOS PUESTO DE BOLICHE
-	
-	//bolo prueba 
-	bolo = Model();
-	bolo.LoadModel("Models/bolo.obj");
-
-	//bola de boliche
-	bolaBoliche = Model();
-	bolaBoliche.LoadModel("Models/bolaBoliche.obj");
-
-	//mesa de boliche
-	mesaBoliche = Model();
-	mesaBoliche.LoadModel("Models/mesaBoliche.obj");
-
-	//cartel boliche
-	cartelBoliche = Model();
-	cartelBoliche.LoadModel("Models/cartelBoliche.obj");
-
-	//estante de premios
-	estantePremios = Model();
-	estantePremios.LoadModel("Models/estantePremios.obj");
-
-	//MODELOS PUESTO DE BATEO
-	bardaBateo = Model();
-	bardaBateo.LoadModel("Models/bardaBateo.obj");
-
-	objetivoBateo = Model();
-	objetivoBateo.LoadModel("Models/objetivoBateo.obj");
-
-	cartelBateo = Model();
-	cartelBateo.LoadModel("Models/cartelBateo.obj");
-
-	bate = Model();
-	bate.LoadModel("Models/bate.obj");
-
-	
-
 	objetosHacha.push_back(Stand);
-	
 	objetosBateo.push_back(Stand2);
-	objetosBateo.push_back(bardaBateo);
-	objetosBateo.push_back(objetivoBateo);
-	objetosBateo.push_back(cartelBateo);
-	objetosBateo.push_back(bate);
-	
 	objetosDados.push_back(Stand3);
 	objetosDardos.push_back(Stand4);
-	
 	objetosBolos.push_back(Stand5);
-	objetosBolos.push_back(bolo);
-	objetosBolos.push_back(bolaBoliche);
-	objetosBolos.push_back(cartelBoliche);
-	objetosBolos.push_back(estantePremios);
-	
 	objetosTopos.push_back(Stand6);
 
 	//Modelos ambientación
@@ -454,22 +370,6 @@ int main()
 	bote1.LoadModel("Models/bote1.obj");
 	bote2 = Model();
 	bote2.LoadModel("Models/bote2.obj");
-	plantaDecorativa = Model();
-	plantaDecorativa.LoadModel("Models/plantaDecorativa.obj");
-
-	//Modelos de personajes
-	
-	//gumball
-	gumball = Model();
-	gumball.LoadModel("Models/gumball.obj");
-	//yoshi
-	yoshi = Model();
-	yoshi.LoadModel("Models/yoshi.obj");
-
-	//snoopy
-	snoopy = Model();
-	snoopy.LoadModel("Models/snoopy.obj");
-
 	
 	objetosAmbientacion.push_back(banca);
 	objetosAmbientacion.push_back(luminaria1);
@@ -480,21 +380,40 @@ int main()
 	objetosAmbientacion.push_back(arbol3);
 	objetosAmbientacion.push_back(bote1);
 	objetosAmbientacion.push_back(bote2);
-	objetosAmbientacion.push_back(plantaDecorativa);
 
+	//Modelos NPCs
+	woodstock = Model();
+	woodstock.LoadModel("Models/Woodstock.obj");
+	peppermint = Model();
+	peppermint.LoadModel("Models/Peppermint.obj");
+	charlie = Model();
+	charlie.LoadModel("Models/Charlie.obj");
 
-	////Modelos comida
-	//StandComida1 = Model();
-	//StandComida1.LoadModel("Models/banca.obj");
-	//StandComida2 = Model();
-	//StandComida2.LoadModel("Models/luminaria1.obj");
-	//StandComida3 = Model();
-	//StandComida3.LoadModel("Models/luminaria2.obj");
+	////Gumball
+	//carrie = Model();
+	//carrie.LoadModel("Models/Woodstock.obj");
+	//teri = Model();
+	//teri.LoadModel("Models/Peppermint.obj");
 
-	//objetosComida.push_back(StandComida1);
-	//objetosComida.push_back(StandComida2);
-	//objetosComida.push_back(StandComida3);
+	////Mario
+	//bowser = Model();
+	//bowser.LoadModel("Models/Charlie.obj");
+	//kingBoo = Model();
+	//kingBoo.LoadModel("Models/Charlie.obj");
+	//donkeyKong = Model();
+	//donkeyKong.LoadModel("Models/Charlie.obj");
+	//wario = Model();
+	//wario.LoadModel("Models/Charlie.obj");
 
+	personajesNPCs.push_back(woodstock);
+	personajesNPCs.push_back(peppermint);
+	personajesNPCs.push_back(charlie);
+	personajesNPCs.push_back(carrie);
+	personajesNPCs.push_back(teri);
+	personajesNPCs.push_back(bowser);
+	personajesNPCs.push_back(kingBoo);
+	personajesNPCs.push_back(donkeyKong);
+	personajesNPCs.push_back(wario);
 
 	std::vector<std::string> skyboxFaces;
 
@@ -543,7 +462,6 @@ int main()
 	glm::mat4 model(1.0);
 	glm::mat4 modelaux(1.0);
 	glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
-	glm::vec3 posicionModelo = glm::vec3(-90.0f, -1.0f, 0.0f); // posición inicial de Modelos
 
 	////Loop mientras no se cierra la ventana
 	while (!mainWindow.getShouldClose())
@@ -553,70 +471,10 @@ int main()
 		deltaTime += (now - lastTime) / limitFPS;
 		lastTime = now;
 
-
-
 		//Recibir eventos del usuario
 		glfwPollEvents();
-		//variables para control de camara y personajes
-		glm::vec3 cameraPos = camera.getCameraPosition();
-		glm::vec3 cameraDir = camera.getCameraDirection();
-		float angulo = atan2(terceraPersonaCamera.getCameraDirection().x, terceraPersonaCamera.getCameraDirection().z);
-		Camera* activeCamera;
-
-		//Switch que controla la camara activa 
-		switch (mainWindow.getCamaraActiva()) {
-		case 0:
-			activeCamera = &camera;
-			break;
-		case 1:
-			activeCamera = &aerialCamera;
-			break;
-
-		case 2: {
-			// Dirección que apunta la cámara (sin componente Y)
-			glm::vec3 forward = glm::normalize(glm::vec3(terceraPersonaCamera.getCameraDirection().x, 0.0f, terceraPersonaCamera.getCameraDirection().z));
-
-			// Offset detrás y arriba del modelo
-			glm::vec3 camOffset = -forward * 23.0f + glm::vec3(0.0f, 10.5f, 0.0f);
-
-			// Posición de la cámara = posición del modelo + offset
-			glm::vec3 camPos = posicionModelo + camOffset;
-
-			terceraPersonaCamera.setPosition(camPos);
-			activeCamera = &terceraPersonaCamera;
-			break;
-		}
-		case 3:
-			activeCamera = &camaraPuestos;
-			break;
-		default:
-			activeCamera = &camera; // Fallback a cámara libre
-			break;
-		}
-
-		GLfloat xChange = mainWindow.getXChange();
-		GLfloat yChange = mainWindow.getYChange();
-
-		//Switch para control de mouse en la camara activa
-		switch (mainWindow.getCamaraActiva()) {
-		case 0: camera.mouseControl(xChange, yChange); camera.keyControl(mainWindow.getsKeys(), deltaTime); break;
-		case 1: aerialCamera.mouseControl(xChange, yChange); break;
-		case 2:
-			terceraPersonaCamera.mouseControl(xChange, yChange);
-			glm::vec3 forward = glm::normalize(glm::vec3(terceraPersonaCamera.getCameraDirection().x, 0.0f, terceraPersonaCamera.getCameraDirection().z));
-			glm::vec3 right = glm::normalize(glm::cross(forward, glm::vec3(0.0f, 1.0f, 0.0f)));
-
-				if (mainWindow.getsKeys()[GLFW_KEY_W])
-					posicionModelo += forward * deltaTime * 1.5f;
-				if (mainWindow.getsKeys()[GLFW_KEY_S])
-					posicionModelo -= forward * deltaTime * 1.5f;
-				if (mainWindow.getsKeys()[GLFW_KEY_A])
-					posicionModelo -= right * deltaTime * 1.5f;
-				if (mainWindow.getsKeys()[GLFW_KEY_D])
-					posicionModelo += right * deltaTime * 1.5f;
-			break;
-		case 3: camaraPuestos.mouseControl(xChange, yChange); break;
-		}
+		camera.keyControl(mainWindow.getsKeys(), deltaTime);
+		camera.mouseControl(mainWindow.getXChange(), mainWindow.getYChange());
 
 		// Clear the window
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
@@ -634,12 +492,8 @@ int main()
 		uniformShininess = shaderList[0].GetShininessLocation();
 
 		glUniformMatrix4fv(uniformProjection, 1, GL_FALSE, glm::value_ptr(projection));
-		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(activeCamera->calculateViewMatrix()));
-		glUniform3f(uniformEyePosition,
-			activeCamera->getCameraPosition().x,
-			activeCamera->getCameraPosition().y,
-			activeCamera->getCameraPosition().z);
-
+		glUniformMatrix4fv(uniformView, 1, GL_FALSE, glm::value_ptr(camera.calculateViewMatrix()));
+		glUniform3f(uniformEyePosition, camera.getCameraPosition().x, camera.getCameraPosition().y, camera.getCameraPosition().z);
 
 		// luz ligada a la cámara de tipo flash
 		//sirve para que en tiempo de ejecución (dentro del while) se cambien propiedades de la luz
@@ -650,26 +504,6 @@ int main()
 		//Luces al shader 
 		// shaderList[0].SetSpotLights(spotLights, spotLightCount);
 		// shaderList[0].SetPointLights(pointLights1, pointLightCount1);
-
-		//Bloque para ciclo de dia y de noche 
-		if (esDeDia) {
-			intensidad -= velocidad;
-			if (intensidad <= 0.01f) {
-				intensidad = 0.01f; // mínimo de noche
-				esDeDia = false;
-			}
-		}
-		else {
-			intensidad += velocidad;
-			if (intensidad >= 0.9f) {
-				intensidad = 0.9f; // máximo de día
-				esDeDia = true;
-			}
-		}
-		mainLight = DirectionalLight(1.0f, 1.0f, 1.0f,  // color
-			intensidad * 0.3f,  // intensidad ambiental (más baja)
-			intensidad,         // intensidad difusa (más fuerte)
-			0.0f, -1.0f, 0.0f); // dirección
 
 		shaderList[0].SetDirectionalLight(&mainLight);
 
@@ -686,37 +520,11 @@ int main()
 		//Modelos ambientación
 		ambientacion(model, uniformModel, objetosAmbientacion);
 
-
-		//Personajes  (Para utilizar un personaje distinto comenta el personaje actual y descomenta el que quieras usar)
-		
-		////gumball
-		//model = glm::mat4(1.0);
-		//model = glm::translate(model, posicionModelo);
-		//model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-		//model = glm::rotate(model, angulo, glm::vec3(0.0f, 1.0f, 0.0f));
-		//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//gumball.RenderModel();
-		
-		
-		////yoshi
-		//model = glm::mat4(1.0);
-		//model = glm::translate(model, posicionModelo);
-		//model = glm::scale(model, glm::vec3(6.0f, 6.0f, 6.0f));
-		//model = glm::rotate(model, angulo, glm::vec3(0.0f, 1.0f, 0.0f));
-		//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		//yoshi.RenderModel();
-		
-		//snoopy
-		model = glm::mat4(1.0);
-		model = glm::translate(model, posicionModelo);
-		model = glm::scale(model, glm::vec3(22.0f, 22.0f, 22.0f));
-		model = glm::rotate(model, angulo, glm::vec3(0.0f, 1.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		snoopy.RenderModel();
-
-
+		//Modelos NPCs
+		NPCs(model, uniformModel, personajesNPCs);
+  
 		//Dados
-		 model = glm::mat4(1.0);
+		model = glm::mat4(1.0);
 		dados(model, uniformModel, objetosDados, tierraTexture, meshList);
 
 		//Lanzamiento de hacha
@@ -734,19 +542,90 @@ int main()
 		//Jaula de bateo
 		model = glm::mat4(1.0);
 		bateo(model, uniformModel, objetosBateo, tierraTexture, meshList);
-		renderEstante(model, uniformModel, estantePremios, glm::vec3(-103.0f, 6.0f, -110.0f), 90.0f);
-		renderEstante(model, uniformModel, estantePremios, glm::vec3(-60.0f, 6.0f, -110.0f), 270.0f);
-		
+
 		//Línea de boliche
 		model = glm::mat4(1.0);
 		bolos(model, uniformModel, objetosBolos, tierraTexture, meshList);
-		renderMesa(model, uniformModel, mesaBoliche, glm::vec3(-78.0f, 0.0f, 166.0f));
 
-
-		//Caminos y área de comida
+		//Área de comida
 		model = glm::mat4(1.0);
-		//comida(model, uniformModel, objetosComida, tierraTexture, meshList);
-		
+		model = glm::translate(model, glm::vec3(-210.0f, -0.8f, 0.0f));
+		model = glm::scale(model, glm::vec3(80.0f, 0.05f, 220.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		//Caminos
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(180.0f, -0.8f, 0.0f));
+		model = glm::scale(model, glm::vec3(20.0f, 0.05f, 150.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(225.0f, -0.8f, 0.0f));
+		model = glm::scale(model, glm::vec3(70.0f, 0.05f, 20.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(115.0f, -0.8f, -140.0f));
+		model = glm::scale(model, glm::vec3(50.0f, 0.05f, 20.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(115.0f, -0.8f, 140.0f));
+		model = glm::scale(model, glm::vec3(50.0f, 0.05f, 20.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-15.0f, -0.8f, -140.0f));
+		model = glm::scale(model, glm::vec3(50.0f, 0.05f, 20.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-15.0f, -0.8f, 140.0f));
+		model = glm::scale(model, glm::vec3(50.0f, 0.05f, 20.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-170.0f, -0.8f, -140.0f));
+		model = glm::scale(model, glm::vec3(100.0f, 0.05f, 20.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-170.0f, -0.8f, 140.0f));
+		model = glm::scale(model, glm::vec3(100.0f, 0.05f, 20.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-210.0f, -0.8f, -120.0f));
+		model = glm::scale(model, glm::vec3(20.0f, 0.05f, 20.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
+		model = glm::mat4(1.0);
+		model = glm::translate(model, glm::vec3(-210.0f, -0.8f, 120.0f));
+		model = glm::scale(model, glm::vec3(20.0f, 0.05f, 20.0f));
+		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		tierraTexture.UseTexture();
+		meshList[4]->RenderMesh();
+
 		glUseProgram(0);
 
 		mainWindow.swapBuffers();
