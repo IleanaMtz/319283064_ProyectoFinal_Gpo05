@@ -28,8 +28,8 @@ public:
 
 	GLfloat getLuminaria() { return luminaria; }
 	GLfloat getLucesCarro() { return lucesCarro; }
-	int getCamaraActiva() { return camaraActiva; }	 // 0 = libre, 1 = aérea, 2 = tercera persona, 3 = lámpara
-	
+
+	GLfloat getPastel() { return pastel; }
 
 
 
@@ -50,9 +50,7 @@ private:
 
 	GLfloat avanzarHeli, retrocederHeli;
 
-	GLfloat luminaria, lucesCarro;
-
-	int camaraActiva;
+	GLfloat luminaria, lucesCarro, pastel;
 
 	bool mouseFirstMoved;
 	static void ManejaTeclado(GLFWwindow* window, int key, int code, int action, int mode);
