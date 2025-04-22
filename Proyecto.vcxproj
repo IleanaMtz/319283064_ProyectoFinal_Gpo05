@@ -137,7 +137,6 @@
     <ClInclude Include="Bateo.h" />
     <ClInclude Include="Bolos.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Comida.h" />
     <ClInclude Include="CommonValues.h" />
     <ClInclude Include="Dados.h" />
     <ClInclude Include="Dardos.h" />
@@ -148,6 +147,7 @@
     <ClInclude Include="Material.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
+    <ClInclude Include="NPCs.h" />
     <ClInclude Include="PointLight.h" />
     <ClInclude Include="Shader_light.h" />
     <ClInclude Include="Skybox.h" />
@@ -163,7 +163,6 @@
     <ClCompile Include="Bateo.cpp" />
     <ClCompile Include="Bolos.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Comida.cpp" />
     <ClCompile Include="Dados.cpp" />
     <ClCompile Include="Dardos.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
@@ -173,6 +172,7 @@
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Mesh_tn.cpp" />
     <ClCompile Include="Model.cpp" />
+    <ClCompile Include="NPCs.cpp" />
     <ClCompile Include="PointLight.cpp" />
     <ClCompile Include="Shader_light.cpp" />
     <ClCompile Include="Skybox.cpp" />

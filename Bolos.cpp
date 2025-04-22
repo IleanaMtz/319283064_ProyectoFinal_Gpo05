@@ -1,6 +1,7 @@
 #include "Bolos.h"
 
 void bolos(glm::mat4 model, GLuint uniformModel, std::vector<Model> objetosBolos, Texture &tierra, std::vector<Mesh*> meshList) {
+
 	GLfloat alturaPin = 0.1f;
 	GLfloat alturaBola = 1.2f;
 
@@ -18,6 +19,7 @@ void bolos(glm::mat4 model, GLuint uniformModel, std::vector<Model> objetosBolos
 
 	renderEstante(model, uniformModel, objetosBolos[4], glm::vec3(-100.0f, 6.0f, 120.0f),90.0f);
 	renderEstante(model, uniformModel, objetosBolos[4], glm::vec3(-58.0f, 6.0f, 120.0f),270.0f);
+
 }
 
 
