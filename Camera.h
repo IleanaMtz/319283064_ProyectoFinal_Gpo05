@@ -21,9 +21,6 @@ public:
 	glm::mat4 calculateViewMatrix();
 
 	~Camera();
-	void setPosition(glm::vec3 newPosition) {
-		position = newPosition;
-	}
 
 private:
 	glm::vec3 position;

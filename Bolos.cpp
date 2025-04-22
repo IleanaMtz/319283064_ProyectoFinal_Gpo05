@@ -1,7 +1,7 @@
 #include "Bolos.h"
 
 void bolos(glm::mat4 model, GLuint uniformModel, std::vector<Model> objetosBolos, Texture &tierra, std::vector<Mesh*> meshList) {
-	renderStand5(model, uniformModel, objetosBolos[0], glm::vec3(-80.0f, -1.0f, 140.0f), tierra, meshList);
+	renderStand5(model, uniformModel, objetosBolos[0], glm::vec3(-80.0f, -1.02f, 140.0f), tierra, meshList);
 }
 
 void renderStand5(glm::mat4 model, GLuint uniformModel, Model stand, glm::vec3 posicion, Texture &tierra, std::vector<Mesh*> lista) {

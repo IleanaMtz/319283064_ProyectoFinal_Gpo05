@@ -1,7 +1,7 @@
 #include "Dardos.h"
 
 void dardos(glm::mat4 model, GLuint uniformModel, std::vector<Model> objetosDardos, Texture &tierra, std::vector<Mesh*> meshList) {
-	renderStand4(model, uniformModel, objetosDardos[0], glm::vec3(50.0f, -1.0f, -140.0f), tierra, meshList);
+	renderStand4(model, uniformModel, objetosDardos[0], glm::vec3(50.0f, -1.02f, -140.0f), tierra, meshList);
 }
 
 void renderStand4(glm::mat4 model, GLuint uniformModel, Model stand, glm::vec3 posicion, Texture &tierra, std::vector<Mesh*> lista) {
