@@ -137,7 +137,6 @@
     <ClInclude Include="Bateo.h" />
     <ClInclude Include="Bolos.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="Comida.h" />
     <ClInclude Include="CommonValues.h" />
     <ClInclude Include="Dados.h" />
     <ClInclude Include="Dardos.h" />
@@ -164,7 +163,6 @@
     <ClCompile Include="Bateo.cpp" />
     <ClCompile Include="Bolos.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="Comida.cpp" />
     <ClCompile Include="Dados.cpp" />
     <ClCompile Include="Dardos.cpp" />
     <ClCompile Include="DirectionalLight.cpp" />
