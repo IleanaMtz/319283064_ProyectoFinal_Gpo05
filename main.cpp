@@ -63,6 +63,7 @@ std::vector<Model> objetosHacha;
 std::vector<Model> objetosTopos;
 std::vector<Model> objetosComida;
 
+
 //camaras realizadas 
 Camera camera;
 Camera aerialCamera;
@@ -83,6 +84,19 @@ Model Stand4;
 Model Stand5;
 Model Stand6;
 
+//modelos puesto boliche
+Model bolo;
+Model bolaBoliche;
+Model mesaBoliche;
+Model cartelBoliche;
+Model estantePremios;
+Model plantaDecorativa;
+
+//modelos puesto de bateo
+Model bardaBateo;
+Model objetivoBateo;
+Model cartelBateo;
+Model bate;
 
 ////Modelo puestos comida
 //Model StandComida1;
@@ -365,11 +379,60 @@ int main()
 	Stand6 = Model();
 	Stand6.LoadModel("Models/StandTopos.obj");
 
+	//MODELOS PUESTO DE BOLICHE
+	
+	//bolo prueba 
+	bolo = Model();
+	bolo.LoadModel("Models/bolo.obj");
+
+	//bola de boliche
+	bolaBoliche = Model();
+	bolaBoliche.LoadModel("Models/bolaBoliche.obj");
+
+	//mesa de boliche
+	mesaBoliche = Model();
+	mesaBoliche.LoadModel("Models/mesaBoliche.obj");
+
+	//cartel boliche
+	cartelBoliche = Model();
+	cartelBoliche.LoadModel("Models/cartelBoliche.obj");
+
+	//estante de premios
+	estantePremios = Model();
+	estantePremios.LoadModel("Models/estantePremios.obj");
+
+	//MODELOS PUESTO DE BATEO
+	bardaBateo = Model();
+	bardaBateo.LoadModel("Models/bardaBateo.obj");
+
+	objetivoBateo = Model();
+	objetivoBateo.LoadModel("Models/objetivoBateo.obj");
+
+	cartelBateo = Model();
+	cartelBateo.LoadModel("Models/cartelBateo.obj");
+
+	bate = Model();
+	bate.LoadModel("Models/bate.obj");
+
+	
+
 	objetosHacha.push_back(Stand);
+	
 	objetosBateo.push_back(Stand2);
+	objetosBateo.push_back(bardaBateo);
+	objetosBateo.push_back(objetivoBateo);
+	objetosBateo.push_back(cartelBateo);
+	objetosBateo.push_back(bate);
+	
 	objetosDados.push_back(Stand3);
 	objetosDardos.push_back(Stand4);
+	
 	objetosBolos.push_back(Stand5);
+	objetosBolos.push_back(bolo);
+	objetosBolos.push_back(bolaBoliche);
+	objetosBolos.push_back(cartelBoliche);
+	objetosBolos.push_back(estantePremios);
+	
 	objetosTopos.push_back(Stand6);
 
 	//Modelos ambientación
@@ -391,6 +454,8 @@ int main()
 	bote1.LoadModel("Models/bote1.obj");
 	bote2 = Model();
 	bote2.LoadModel("Models/bote2.obj");
+	plantaDecorativa = Model();
+	plantaDecorativa.LoadModel("Models/plantaDecorativa.obj");
 
 	//Modelos de personajes
 	
@@ -415,6 +480,7 @@ int main()
 	objetosAmbientacion.push_back(arbol3);
 	objetosAmbientacion.push_back(bote1);
 	objetosAmbientacion.push_back(bote2);
+	objetosAmbientacion.push_back(plantaDecorativa);
 
 
 	////Modelos comida
@@ -511,7 +577,7 @@ int main()
 			glm::vec3 forward = glm::normalize(glm::vec3(terceraPersonaCamera.getCameraDirection().x, 0.0f, terceraPersonaCamera.getCameraDirection().z));
 
 			// Offset detrás y arriba del modelo
-			glm::vec3 camOffset = -forward * 7.0f + glm::vec3(0.0f, 2.5f, 0.0f);
+			glm::vec3 camOffset = -forward * 23.0f + glm::vec3(0.0f, 10.5f, 0.0f);
 
 			// Posición de la cámara = posición del modelo + offset
 			glm::vec3 camPos = posicionModelo + camOffset;
@@ -620,38 +686,37 @@ int main()
 		//Modelos ambientación
 		ambientacion(model, uniformModel, objetosAmbientacion);
 
+
 		//Personajes  (Para utilizar un personaje distinto comenta el personaje actual y descomenta el que quieras usar)
 		
 		////gumball
 		//model = glm::mat4(1.0);
 		//model = glm::translate(model, posicionModelo);
-		//model = glm::scale(model, glm::vec3(0.3f, 0.3f, 0.3f));
+		//model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 		//model = glm::rotate(model, angulo, glm::vec3(0.0f, 1.0f, 0.0f));
 		//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		//gumball.RenderModel();
 		
-		/*
-		//yoshi
-
-		model = glm::mat4(1.0);
-		model = glm::translate(model, posicionModelo);
-		model = glm::scale(model, glm::vec3(3.0f, 3.0f, 3.0f));
-		model = glm::rotate(model, angulo, glm::vec3(0.0f, 1.0f, 0.0f));
-		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
-		yoshi.RenderModel();
-		*/
+		
+		////yoshi
+		//model = glm::mat4(1.0);
+		//model = glm::translate(model, posicionModelo);
+		//model = glm::scale(model, glm::vec3(6.0f, 6.0f, 6.0f));
+		//model = glm::rotate(model, angulo, glm::vec3(0.0f, 1.0f, 0.0f));
+		//glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
+		//yoshi.RenderModel();
 		
 		//snoopy
 		model = glm::mat4(1.0);
 		model = glm::translate(model, posicionModelo);
-		model = glm::scale(model, glm::vec3(4.0f, 4.0f, 4.0f));
+		model = glm::scale(model, glm::vec3(22.0f, 22.0f, 22.0f));
 		model = glm::rotate(model, angulo, glm::vec3(0.0f, 1.0f, 0.0f));
 		glUniformMatrix4fv(uniformModel, 1, GL_FALSE, glm::value_ptr(model));
 		snoopy.RenderModel();
-		
 
-    //Dados
-    model = glm::mat4(1.0);
+
+		//Dados
+		 model = glm::mat4(1.0);
 		dados(model, uniformModel, objetosDados, tierraTexture, meshList);
 
 		//Lanzamiento de hacha
@@ -669,10 +734,14 @@ int main()
 		//Jaula de bateo
 		model = glm::mat4(1.0);
 		bateo(model, uniformModel, objetosBateo, tierraTexture, meshList);
-
+		renderEstante(model, uniformModel, estantePremios, glm::vec3(-103.0f, 6.0f, -110.0f), 90.0f);
+		renderEstante(model, uniformModel, estantePremios, glm::vec3(-60.0f, 6.0f, -110.0f), 270.0f);
+		
 		//Línea de boliche
 		model = glm::mat4(1.0);
 		bolos(model, uniformModel, objetosBolos, tierraTexture, meshList);
+		renderMesa(model, uniformModel, mesaBoliche, glm::vec3(-78.0f, 0.0f, 166.0f));
+
 
 		//Caminos y área de comida
 		model = glm::mat4(1.0);

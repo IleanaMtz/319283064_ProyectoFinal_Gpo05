@@ -26,4 +26,4 @@ void renderArbol3(glm::mat4 model, GLuint uniformModel, Model arbol3, glm::vec3 
 void renderBote1(glm::mat4 model, GLuint uniformModel, Model bote1, glm::vec3 posicion, int grados);
 void renderBote2(glm::mat4 model, GLuint uniformModel, Model bote2, glm::vec3 posicion, int grados);
 
-
+void renderPlantaDecorativa(glm::mat4 model, GLuint uniformModel, Model planta, glm::vec3 position);
